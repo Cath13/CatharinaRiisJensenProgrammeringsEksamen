@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 //Source: https://pressstart.vip/tutorials/2019/05/15/95/swiping-pages-in-unity.html
 
@@ -19,31 +20,31 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     private int _currentPage = 1; //Keeps track of the page that is currently visible
 
     CurrentPageData _currentPageData;
-    private void Awake()
-    {
+   // private void Awake()
+    //{
         //_currentPageData = FindObjectOfType<CurrentPageData>();
-    }
+    //}
 
-    void Start()
-    {
-        panelLocationVector = transform.position; //Sets location of the panel to its current location
-        _currentPageData = FindObjectOfType<CurrentPageData>();
+    //void Start()
+    //{
+      //  panelLocationVector = transform.position; //Sets location of the panel to its current location
+      //  _currentPageData = FindObjectOfType<CurrentPageData>();
 
-        if (_currentPageData.currentPage == 1)
-        {
-            OnClickHomeBottom();
-        }
-        else if (_currentPageData.currentPage == 2)
-        {
-            OnClickCameraBottom();
-        }
-        else if (_currentPageData.currentPage == 3)
-        {
-            OnClickInventoryBottom();
-        }
-        else
-            OnClickHomeBottom();
-    }
+       // if (_currentPageData.currentPage == 1)
+       // {
+         //   OnClickHomeBottom();
+       // }
+       // else if (_currentPageData.currentPage == 2)
+        //{
+          //  OnClickCameraBottom();
+       // }
+        //else if (_currentPageData.currentPage == 3)
+        //{
+          //  OnClickInventoryBottom();
+       // }
+        //else
+          //  OnClickHomeBottom();
+   // }
 
 
     public void OnDrag(PointerEventData data)
@@ -96,6 +97,96 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
 
     //THE METHODS BELOW HAS TO DO WITH NAVIGATION USING THE BOTTOMBAR
 
+
+    //New Input System used below:
+    private NavigationBarTouchControls touchControls;
+    //public GameObject Canvas; 
+
+    private void Awake() {
+        touchControls = new NavigationBarTouchControls();
+
+    }
+
+    private void OnEnable() {
+        
+        touchControls.Enable();
+    }
+
+    private void OnDisable() {
+        
+        touchControls.Disable();
+    }
+
+    public void Start() {
+    
+        touchControls.Touch.TouchPress.started += ctx => StartTouchHome(ctx);
+        touchControls.Touch.TouchPress.canceled += ctx => EndTouchHome(ctx);
+
+        /* touchControls.Touch.TouchPress.started += ctx => StartTouchCamera(ctx);
+        touchControls.Touch.TouchPress.canceled += ctx => EndTouchCamera(ctx);
+
+        touchControls.Touch.TouchPress.started += ctx => StartTouchInventory(ctx);
+        touchControls.Touch.TouchPress.canceled += ctx => EndTouchInventory(ctx); */
+    
+    }
+
+    public void StartTouchHome(InputAction.CallbackContext context){
+
+        Debug.Log("Touch started" + touchControls.Touch.TouchPosition.ReadValue<Vector2>());
+        //if (OnStartTouch != null) OnStartTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
+
+        
+    }
+
+    public void EndTouchHome(InputAction.CallbackContext context){
+
+        Debug.Log("Touch ended");
+        //if (OnEndTouch != null) OnEndTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
+
+        PanelLocationObject.transform.position = homeScreen; //new Vector3(720, 1480, 0);
+        panelLocationVector = homeScreen; //new Vector3(720, 1480, 0);
+
+    }
+
+
+   /*  public void StartTouchCamera(InputAction.CallbackContext context){
+        
+        panelLocationVector = cameraScreen; //new Vector3(-720, 1480, 0);
+    }
+
+    public void EndTouchCamera(InputAction.CallbackContext context){
+
+        PanelLocationObject.transform.position = cameraScreen;//new Vector3(-720, 1480, 0);
+        
+        
+
+    }
+
+
+    public void StartTouchInventory(InputAction.CallbackContext context){
+
+        panelLocationVector = inventoryScreen;//new Vector3(-2160, 1480, 0)
+    }
+
+    public void EndTouchInventory(InputAction.CallbackContext context){
+        
+        PanelLocationObject.transform.position = inventoryScreen;//new Vector3(-2160, 1480, 0);
+ 
+        
+
+    } */
+
+
+
+
+
+
+
+
+
+
+    //Old Input System used below:
+
     public Image homeButton, cameraButton, inventoryButton; //The images connected to buttons in bottombar should be assigned accordingly
 
     public GameObject PanelLocationObject; //The 'Panel' should be assigned to this Gameobject.
@@ -108,23 +199,23 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     Vector3 cameraScreen = new Vector3(-720, 1480, 0); //New vector3 based on the cameraScreens location
     Vector3 inventoryScreen = new Vector3(-2160, 1480, 0); //New vector3 based on the inventoryScreens location
 
-    public void OnClickHomeBottom() //Should be placed on Home button in bottombar
+    /* public void OnClickHomeBottom() //Should be placed on Home button in bottombar
     {
         
-        PanelLocationObject.transform.position = homeScreen; //new Vector3(720, 1480, 0);
-        panelLocationVector = homeScreen; //new Vector3(720, 1480, 0);
+       // PanelLocationObject.transform.position = homeScreen; //new Vector3(720, 1480, 0);
+       // panelLocationVector = homeScreen; //new Vector3(720, 1480, 0);
 
         //HomeScreen is equal to _currentPage 1,
         if (_currentPage == 2) //so if the _currentPage is equal to 2(CameraScreen) 
         {
-            _currentPage--; 
+            _currentPage--;
         }
         else if(_currentPage == 3) //or 3(InventoryScreen),
         {
             _currentPage = _currentPage - 2; //then the _currentPage variable should change based on direction of swipe.
         }
         _currentPageData.currentPage = 1;
-    }
+    } */
 
     public void OnClickCameraBottom() //Should be placed on Camera button in bottombar
     {
