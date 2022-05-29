@@ -35,7 +35,7 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press(behavior=2)""
                 },
                 {
-                    ""name"": ""TouchPosition"",
+                    ""name"": ""TouchPositionHome"",
                     ""type"": ""PassThrough"",
                     ""id"": ""5152cfe5-d0cc-4843-855c-92ced5a9f46c"",
                     ""expectedControlType"": ""Vector2"",
@@ -73,7 +73,7 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TouchPosition"",
+                    ""action"": ""TouchPositionHome"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -86,7 +86,7 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_TouchInput = m_Touch.FindAction("TouchInput", throwIfNotFound: true);
         m_Touch_TouchPress = m_Touch.FindAction("TouchPress", throwIfNotFound: true);
-        m_Touch_TouchPosition = m_Touch.FindAction("TouchPosition", throwIfNotFound: true);
+        m_Touch_TouchPositionHome = m_Touch.FindAction("TouchPositionHome", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -138,14 +138,14 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
     private ITouchActions m_TouchActionsCallbackInterface;
     private readonly InputAction m_Touch_TouchInput;
     private readonly InputAction m_Touch_TouchPress;
-    private readonly InputAction m_Touch_TouchPosition;
+    private readonly InputAction m_Touch_TouchPositionHome;
     public struct TouchActions
     {
         private @NavigationBarTouchControls m_Wrapper;
         public TouchActions(@NavigationBarTouchControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @TouchInput => m_Wrapper.m_Touch_TouchInput;
         public InputAction @TouchPress => m_Wrapper.m_Touch_TouchPress;
-        public InputAction @TouchPosition => m_Wrapper.m_Touch_TouchPosition;
+        public InputAction @TouchPositionHome => m_Wrapper.m_Touch_TouchPositionHome;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -161,9 +161,9 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
                 @TouchPress.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPress;
                 @TouchPress.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPress;
                 @TouchPress.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPress;
-                @TouchPosition.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPosition;
-                @TouchPosition.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPosition;
-                @TouchPosition.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPosition;
+                @TouchPositionHome.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPositionHome;
+                @TouchPositionHome.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPositionHome;
+                @TouchPositionHome.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnTouchPositionHome;
             }
             m_Wrapper.m_TouchActionsCallbackInterface = instance;
             if (instance != null)
@@ -174,9 +174,9 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
                 @TouchPress.started += instance.OnTouchPress;
                 @TouchPress.performed += instance.OnTouchPress;
                 @TouchPress.canceled += instance.OnTouchPress;
-                @TouchPosition.started += instance.OnTouchPosition;
-                @TouchPosition.performed += instance.OnTouchPosition;
-                @TouchPosition.canceled += instance.OnTouchPosition;
+                @TouchPositionHome.started += instance.OnTouchPositionHome;
+                @TouchPositionHome.performed += instance.OnTouchPositionHome;
+                @TouchPositionHome.canceled += instance.OnTouchPositionHome;
             }
         }
     }
@@ -185,6 +185,6 @@ public class @NavigationBarTouchControls : IInputActionCollection, IDisposable
     {
         void OnTouchInput(InputAction.CallbackContext context);
         void OnTouchPress(InputAction.CallbackContext context);
-        void OnTouchPosition(InputAction.CallbackContext context);
+        void OnTouchPositionHome(InputAction.CallbackContext context);
     }
 }

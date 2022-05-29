@@ -119,7 +119,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     }
 
     public void Start() {
-    
+        
         touchControls.Touch.TouchPress.started += ctx => StartTouchHome(ctx);
         touchControls.Touch.TouchPress.canceled += ctx => EndTouchHome(ctx);
 
@@ -133,7 +133,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
 
     public void StartTouchHome(InputAction.CallbackContext context){
 
-        Debug.Log("Touch started" + touchControls.Touch.TouchPosition.ReadValue<Vector2>());
+        Debug.Log("Touch started" + touchControls.Touch.TouchPositionHome.ReadValue<Vector2>());
         //if (OnStartTouch != null) OnStartTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
 
         
@@ -141,16 +141,17 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
 
     public void EndTouchHome(InputAction.CallbackContext context){
 
-        Debug.Log("Touch ended");
+        Debug.Log("Touch ended" + touchControls.Touch.TouchPositionHome.ReadValue<Vector2>());
         //if (OnEndTouch != null) OnEndTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
 
         PanelLocationObject.transform.position = homeScreen; //new Vector3(720, 1480, 0);
         panelLocationVector = homeScreen; //new Vector3(720, 1480, 0);
 
+
     }
 
 
-   /*  public void StartTouchCamera(InputAction.CallbackContext context){
+    /* public void StartTouchCamera(InputAction.CallbackContext context){
         
         panelLocationVector = cameraScreen; //new Vector3(-720, 1480, 0);
     }
@@ -158,9 +159,6 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     public void EndTouchCamera(InputAction.CallbackContext context){
 
         PanelLocationObject.transform.position = cameraScreen;//new Vector3(-720, 1480, 0);
-        
-        
-
     }
 
 
@@ -172,10 +170,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     public void EndTouchInventory(InputAction.CallbackContext context){
         
         PanelLocationObject.transform.position = inventoryScreen;//new Vector3(-2160, 1480, 0);
- 
-        
-
-    } */
+    }  */
 
 
 
@@ -200,11 +195,11 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     Vector3 cameraScreen = new Vector3(-720, 1480, 0); //New vector3 based on the cameraScreens location
     Vector3 inventoryScreen = new Vector3(-2160, 1480, 0); //New vector3 based on the inventoryScreens location
 
-    /* public void OnClickHomeBottom() //Should be placed on Home button in bottombar
+     /* public void OnClickHomeBottom() //Should be placed on Home button in bottombar
     {
         
-       // PanelLocationObject.transform.position = homeScreen; //new Vector3(720, 1480, 0);
-       // panelLocationVector = homeScreen; //new Vector3(720, 1480, 0);
+        PanelLocationObject.transform.position = homeScreen; //new Vector3(720, 1480, 0);
+        panelLocationVector = homeScreen; //new Vector3(720, 1480, 0);
 
         //HomeScreen is equal to _currentPage 1,
         if (_currentPage == 2) //so if the _currentPage is equal to 2(CameraScreen) 
@@ -216,9 +211,9 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
             _currentPage = _currentPage - 2; //then the _currentPage variable should change based on direction of swipe.
         }
         _currentPageData.currentPage = 1;
-    } */
+    }  */
 
-    public void OnClickCameraBottom() //Should be placed on Camera button in bottombar
+     public void OnClickCameraBottom() //Should be placed on Camera button in bottombar
     {
         
         PanelLocationObject.transform.position = cameraScreen;//new Vector3(-720, 1480, 0);
@@ -251,7 +246,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
         }
         _currentPageData.currentPage = 3;
     }
-
+ 
     public void SetColorCameraButton(Color color)
     {
         Color _color;

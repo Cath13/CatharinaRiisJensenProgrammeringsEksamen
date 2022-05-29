@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
-{
+/*public class InputManager : MonoBehaviour
+ {
 
     //public delegate void StartTouchEvent(Vector2 position, float time);
     //public event StartTouch OnStartTouch;
@@ -45,4 +45,4 @@ public class InputManager : MonoBehaviour
         //if (OnEndTouch != null) OnEndTouch(touchControls.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.time);
     }
 
-}
+} */
