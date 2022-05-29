@@ -96,6 +96,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
     }
 
     //THE METHODS BELOW HAS TO DO WITH NAVIGATION USING THE BOTTOMBAR
+    //Inspiration taget fra: https://www.youtube.com/watch?v=ERAN5KBy2Gs&t=632s
 
 
     //New Input System used below:

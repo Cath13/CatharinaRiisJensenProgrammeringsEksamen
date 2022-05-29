@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
+//Inspiration taget fra: https://www.youtube.com/watch?v=ERAN5KBy2Gs&t=632s
 /*public class InputManager : MonoBehaviour
  {
 
