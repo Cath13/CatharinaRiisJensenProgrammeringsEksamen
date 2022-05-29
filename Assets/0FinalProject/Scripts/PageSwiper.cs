@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -99,6 +99,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler //These t
 
 
     //New Input System used below:
+    
     private NavigationBarTouchControls touchControls;
     //public GameObject Canvas; 
 
